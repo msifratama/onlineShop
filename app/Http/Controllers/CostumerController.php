@@ -14,9 +14,9 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        $costumers = Costumer::all();
+        $costumer = Costumer::all();
 
-        return view('components.costumer.index', compact('costumers'));
+        return view('components.costumer.index', compact('costumer'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CostumerController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.costumer.create');
     }
 
     /**
@@ -37,7 +37,19 @@ class CostumerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+        ]);
+
+        Costumer::create([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect()->route('costumer-index')->with('status', 'Berhasil ditambahkan');
     }
 
     /**
@@ -57,9 +69,11 @@ class CostumerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $costumer = Costumer::where('id', $id)->first();
+
+        return view('components.costumer.update', compact('costumer'));
     }
 
     /**
@@ -71,7 +85,15 @@ class CostumerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $costumer = Costumer::where('id', $id)->first();
+
+        $costumer->update([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect()->route('costumer-index')->with('status', 'Berhasil diupdate');
     }
 
     /**
@@ -80,9 +102,12 @@ class CostumerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        Costumer::destroy($id);
-        return redirect('costumers');
+        $delete = Costumer::find($id);
+
+        $delete->delete();
+
+        return redirect()->route('costumer-index')->with('status', 'Berhasil dihapus');
     }
 }

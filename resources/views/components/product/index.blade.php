@@ -1,45 +1,53 @@
-product.blade.php
 @extends('layout.welcome')
 
 @section('title', 'Product')
 @section('content')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Products</h1>
-            <div class="btn-group me-2">
-                <a href="{{-- {{ route('') }} --}}" type="button" class="btn btn-sm btn-outline-secondary">Tambah Data</a>
+    <div class="col-md-12 mt-5">
+        <div class="white_shd full {{-- margin_bottom_30 --}}">
+            <div class="full graph_head">
+                <div class="heading1 margin_0">
+                    <h2>Produk</h2>
+                    <a class="btn btn-outline-primary rd-2" href="{{ route('product-create') }}">Tambah Produk</a>
+                </div>
+            </div>
+            <div class="table_section padding_infor_info">
+                <div class="table-responsive-sm">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Produk</th>
+                                <th>Nama Produk</th>
+                                <th>Deskripsi</th>
+                                <th>Harga Satuan</th>
+                                <th>Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        @foreach ($product as $key => $item)
+                            <tbody>
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $item->product_code }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->description }}</td>
+                                    <td>Rp. {{ number_format($item->price) }}</td>
+                                    <td>{{ $item->qty }}</td>
+                                    <td>
+                                        <a href="{{ route('product-edit', $item->id) }}" class="btn btn-info">Update</a>
+                                        <form action="{{ route('product-delete', $item->id) }}" method="POST"
+                                            style="display: inline-block" onsubmit="return confirm('Yakin?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
+                    </table>
+                </div>
             </div>
         </div>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama Produk</th>
-                    <th scope="col">Deskripsi</th>
-                    <th scope="col">Harga Satuan</th>
-                    <th scope="col">Stok</th>
-                    <th scope="col">Action</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($product as $key => $data)
-                    <tr>
-                        <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{ $data->name }}</td>
-                        <td>{{ $data->description }}</td>
-                        <td>{{ $data->price }}</td>
-                        <td>{{ $data->qty }}</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
-                            <a href="{{ route('delete/product', $data->id) }}"
-                                class="btn btn-outline-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                @endforeach
-
-            </tbody>
-        </table>
-    </main>
+    </div>
 @endsection

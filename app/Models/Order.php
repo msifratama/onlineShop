@@ -11,7 +11,8 @@ class Order extends Model
 
     protected $fillable = [
         'product_id',
-        'qty'
+        'qty',
+        'total_price',
     ];
 
     public function product()

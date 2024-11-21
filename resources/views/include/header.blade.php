@@ -1,13 +1,25 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Online Shop</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">Sign out</a>
+<div class="topbar">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="full">
+            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+            <div class="right_topbar">
+                <div class="icon_info">
+                    <ul class="user_profile_dd">
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle"
+                                    src="{{ asset('assets/admin/images/layout_img/user_img.jpg') }}"
+                                    alt="#" /><span class="name_user">User</span></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="profile.html">My Profile</a>
+                                <a class="dropdown-item" href="settings.html">Settings</a>
+                                <a class="dropdown-item" href="help.html">Help</a>
+                                <a class="dropdown-item" href="#"><span>Log Out</span> <i
+                                        class="fa fa-sign-out"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</header>
+    </nav>
+</div>

@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('components.product.index');
+        return view('components.product.create');
     }
 
     /**
@@ -37,7 +37,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product_code' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
+        ]);
+
+        Product::create([
+            'product_code' => $request->input('product_code'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'qty' => $request->input('qty'),
+        ]);
+
+        return redirect()->route('product-index')->with('status', 'Data berhasil ditambah');
     }
 
     /**
@@ -57,9 +73,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+
+        return view('components.product.update', compact('product'));
     }
 
     /**
@@ -71,7 +89,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+
+        $product->update([
+            'product_code' => $request->input('product_code'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'qty' => $request->input('qty'),
+        ]);
+
+        return redirect()->route('product-index')->with('status', 'Berhasil diupdate');
     }
 
     /**
@@ -80,9 +108,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        Product::destroy($id);
-        return redirect('products');
+        $delete = Product::find($id);
+
+        $delete->delete();
+
+        return redirect()->route('product-index')->with('status', 'Berhasil di hapus');
     }
 }

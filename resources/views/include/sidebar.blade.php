@@ -1,45 +1,48 @@
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background-color: #98FB98;">
-        <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
-                        href="{{ route('dashboard') }}">
-                        <span data-feather="home"></span>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('orders') ? 'active' : '' }}" href="{{ route('order-index') }}">
-                        <span data-feather="file"></span>
-                        Orders
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('products') ? 'active' : '' }}"
-                        href="{{ route('product-index') }}">
-                        <span data-feather="shopping-crt"></span>
-                        Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('costumers') ? 'active' : '' }}"
-                        href="{{ route('costumer-index') }}">
-                        <span data-feather="users"></span>
-                        Customers
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('reports') ? 'active' : '' }}" href="{{ url('reports') }}">
-                        <span data-feather="bar-chart-2"></span>
-                        Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('integrations') ? 'active' : '' }}" href="#">
-                        <span data-feather="layers"></span>
-                        Integrations
-                    </a>
-                </li>
-            </ul>
+<nav id="sidebar">
+    <div class="sidebar_blog_1">
+        <div class="sidebar-header">
+            <div class="logo_section">
+                <a href="index.html"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png"
+                        alt="#" /></a>
+            </div>
         </div>
-    </nav>
+        <div class="sidebar_user_info">
+            <div class="icon_setting"></div>
+            <div class="user_profle_side">
+                <div class="user_img"><img class="img-responsive"
+                        src="{{ asset('assets/admin/images/layout_img/user_img.jpg') }}" alt="#" />
+                </div>
+                <div class="user_info">
+                    <h6>User</h6>
+                    <p><span class="online_animation"></span> Online</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar_blog_2">
+        <h4>General</h4>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="{{ route('dashboard') }}"><i class="fa fa-home blue1_color"></i><span>Dashboard</span></a>
+            </li>
+            <li>
+                <a href="{{ route('order-index') }}"><i
+                        class="fa fa-cart-shopping yellow_color"></i><span>Orders</span></a>
+            </li>
+            <li>
+                <a href="{{ route('product-index') }}"><i class="fa fa-tags green_color"></i><span>Products</span></a>
+            </li>
+            <li>
+                <a href="{{ route('costumer-index') }}"><i
+                        class="fa fa-user-tag red_color"></i><span>Customers</span></a>
+            </li>
+            <li>
+                <a href="{{ route('report-index') }}"><i
+                        class="fa fa-chart-simple black_color"></i><span>Reports</span></a>
+            </li>
+            {{-- <li>
+                    <a href="{{ route('') }}"><i class="fa fa-home blue1_color"></i><span>Integrations</span></a>
+                </li> --}}
+        </ul>
+    </div>
+</nav>

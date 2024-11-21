@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->enum('status',['0','1']);
             $table->timestamps();
         });
     }
